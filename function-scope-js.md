@@ -1,46 +1,38 @@
-$(document).ready(function() {
-  console.log('Probar con el numero valido 4544164785372342');      
-  
-  // Declaramos las variables que vamos a utilizar
-  var $inputCard = $('#card-number');
-  var $inputMonth = $('.input-month');
-  var $inputYear = $('.input-year');
-  var $buttonNext = $('#next');
-  var regexOnlyNumbers = /^[0-9]+$/;
-  var labelErrorOrSuccessMessages = $('label[for="card-number"]');
-    
-  // Identificar el evento que nos permite capturar el input del usuario
-  $inputCard.on('input', function() {
-    isValidCreditCard($(this).val().trim());
-  });
-  
-  // Funciones que habilita el boton del formulario
-  function activeButton() {
-    $buttonNext.attr('disabled', false);
-  } 
- 
-  // Funcion que desabilita el boton del formulario
-  function desactiveButton() {  
-    $buttonNext.attr('disabled', true);
-  } 
 
-  // Funcion que valida la longitud del input ingresado por el usuario
-  function lengthCard(input) {
+
+## Funciones Statements y Globales
+
+```javascript
+function activeButton() {
+    $buttonNext.attr('disabled', false);
+  }
+``` 
+ 
+  ```javascript
+function desactiveButton() {  
+     $buttonNext.attr('disabled', true);
+  } 
+```
+
+```javascript
+function lengthCard(input) {
     if (input.trim().length === 16) {
       return input;
     }
   }
-  
-  // Funcion que valida la longitud del input ingresado por el usuario
-  function onlyNumbers(input) {
+```
+
+```javascript
+function onlyNumbers(input) {
     var regex = /^[0-9]+$/;
     if (regex.test(input)) {
       return input;
     }
   }
- 
-  // Funcion que valida que sea una un numero de tarjeta valido   
-  function isValidCreditCard(numberCard) {
+```
+
+```javascript
+function isValidCreditCard(numberCard) {
     var creditCardNumber = onlyNumbers(lengthCard(numberCard));
     if (creditCardNumber !== undefined) {
       var arr = [];
@@ -71,4 +63,41 @@ $(document).ready(function() {
       desactiveButton();  
     }
   }
-});
+```
+## Función Anónima
+
+```javascript
+$inputCard.on('input', function() {
+    isValidCreditCard($(this).val().trim());
+  });
+```
+
+```javascript
+$(document).ready(function() {
+
+}
+```
+
+## Función Callback
+
+```javascript
+var creditCardNumber = onlyNumbers(lengthCard(numberCard));
+```
+
+## Funciones de stack execution
+En la función `isValidCreditCard` existen estas funciones que forman parte de la pila de Ejecución.
+
+1.-  `onlyNumbers()`
+
+2.-  `lengthCard()` 
+
+## Funciones que forman parte de la cola de Eventos (event queue)
+
+La función `isValidCreditCard` forma parte de la cola de ejecución durante el evento `input`.
+
+```javascript
+$inputCard.on('input', function() {
+    isValidCreditCard($(this).val().trim());
+  });
+```
+
